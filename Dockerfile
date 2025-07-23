@@ -1,8 +1,14 @@
-# Build stage
-FROM node:20-alpine as build-stage
+FROM node:20 AS build-stage
 
-# Install build dependencies
-RUN apk add --no-cache python3 make g++
+# Update package sources to use faster mirrors
+RUN sed -i 's|http://archive.ubuntu.com|http://mirror.yandex.ru|g' /etc/apt/sources.list || true && \
+    sed -i 's|http://security.ubuntu.com|http://mirror.yandex.ru|g' /etc/apt/sources.list || true
+
+# Install build dependencies (much faster than Alpine)
+RUN apt-get update && \
+    apt-get install -y python3 make g++ && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -10,50 +16,37 @@ WORKDIR /app
 # Copy package files first (for better caching)
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies with faster registry
+RUN npm config set registry https://registry.npmjs.org/ && \
+    npm ci --prefer-offline --no-audit --production=false
 
 # Copy source code and public assets
 COPY . .
 
-# Debug: Check what's in public directory before build
-RUN echo "=== PUBLIC DIRECTORY BEFORE BUILD ===" && \
-    find public/ -type f | sort
-
 # Build the application
 RUN npm run build
 
-# Debug: Check what's in dist directory after build
-RUN echo "=== DIST DIRECTORY AFTER BUILD ===" && \
-    find dist/ -type f | sort && \
-    echo "=== CHECKING FOR SVG FILES ===" && \
-    find dist/ -name "*.svg" | sort
+# Verify build output
+RUN echo "=== BUILD VERIFICATION ===" && \
+    find dist/ -name "*.svg" && \
+    find dist/ -name "*.png" && \
+    echo "Total files in dist:" && \
+    find dist/ -type f | wc -l
 
-# Fix permissions for all files
-RUN chmod -R 755 dist/ && \
-    find dist/ -type f -exec chmod 644 {} \;
+# Production stage - Keep Alpine for smaller final image
+FROM alpine:latest AS production-stage
 
-# Production stage
-FROM alpine:latest as production-stage
+# Use faster mirrors
+RUN echo "http://mirror.yandex.ru/mirrors/alpine/latest-stable/main" > /etc/apk/repositories && \
+    echo "http://mirror.yandex.ru/mirrors/alpine/latest-stable/community" >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache curl && \
+    apk cache clean
 
 WORKDIR /app
 
-# Copy the entire dist directory with nginx user ownership
+# Copy the entire dist directory
 COPY --from=build-stage --chown=101:101 /app/dist ./dist
 
-# Install basic tools for debugging
-RUN apk add --no-cache tree curl
-
-# Fix permissions explicitly for nginx user (uid 101 in nginx:alpine)
-RUN chmod -R 755 dist/ && \
-    find dist/ -type f -exec chmod 644 {} \; && \
-    chown -R 101:101 dist/
-
-# Debug: Verify permissions and contents
-RUN echo "=== FINAL DIST CONTENTS WITH PERMISSIONS ===" && \
-    ls -la dist/ && \
-    echo "=== ALL FILES WITH PERMISSIONS ===" && \
-    find dist/ -ls | head -20
-
-# Keep container running to maintain volume
-CMD ["sh", "-c", "echo 'Container ready, volume populated with proper permissions' && tail -f /dev/null"]
+# Keep container running
+CMD ["sh", "-c", "echo 'Build complete' && tail -f /dev/null"]
