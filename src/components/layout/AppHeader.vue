@@ -41,16 +41,16 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a
-                href="#about"
-                class="nav-link"
-                :class="{ active: activeSection === 'about' }"
-                @click.prevent="(scrollToAbout(), closeMenu())"
-              >
-                О нас
-              </a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--              <a-->
+<!--                href="#about"-->
+<!--                class="nav-link"-->
+<!--                :class="{ active: activeSection === 'about' }"-->
+<!--                @click.prevent="(scrollToAbout(), closeMenu())"-->
+<!--              >-->
+<!--                О нас-->
+<!--              </a>-->
+<!--            </li>-->
 
             <li class="nav-item">
               <a
@@ -101,6 +101,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
 import { useCompanyStore } from '../../stores/company'
+import { onUpdated } from '@vue/runtime-core'
 
 const { companyInfo, contactInfo } = useCompanyStore()
 

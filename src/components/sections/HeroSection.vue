@@ -69,7 +69,7 @@ const carouselImages: CarouselImage[] = [
     },
   },
   {
-    src: '/images/house.jpg',
+    src: '/images/transport.jpg',
     alt: 'Транспортные услуги',
     width: 800,
     height: 600,

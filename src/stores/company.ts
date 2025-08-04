@@ -5,7 +5,7 @@ import type { CompanyInfo, ContactInfo } from '@/types'
 export const useCompanyStore = defineStore('company', () => {
   const companyInfo = ref<CompanyInfo>({
     name: 'Мемориал',
-    description: 'Ритуальное агентство полного цикла с опытом работы более 15 лет',
+    description: 'Ритуальное услуги с опытом работы более 15 лет',
     experience: '15 лет',
     license: 'Лицензия № РО-77-01-002345',
     advantages: [
@@ -21,8 +21,8 @@ export const useCompanyStore = defineStore('company', () => {
   })
 
   const contactInfo = ref<ContactInfo>({
-    phone: import.meta.env.VITE_COMPANY_PHONE || '+7 (913) 182-26-28',
-    phoneSecond: import.meta.env.VITE_COMPANY_PHONE_SECOND || '+7 (916) 987-65-43',
+    phone: import.meta.env.VITE_COMPANY_PHONE || '+7 (913) 048-90-89',
+    phoneSecond: import.meta.env.VITE_COMPANY_PHONE_SECOND || '+7 (983) 207-69-70',
     email: import.meta.env.VITE_COMPANY_EMAIL || 'info@ritual-memory.ru',
     address: import.meta.env.VITE_COMPANY_ADDRESS || 'Шушенское, Первомайская ул., 46',
     workingHours: {
