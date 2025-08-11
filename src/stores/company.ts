@@ -23,8 +23,8 @@ export const useCompanyStore = defineStore('company', () => {
   const contactInfo = ref<ContactInfo>({
     phone: import.meta.env.VITE_COMPANY_PHONE || '+7 (913) 048-90-89',
     phoneSecond: import.meta.env.VITE_COMPANY_PHONE_SECOND || '+7 (983) 207-69-70',
-    email: import.meta.env.VITE_COMPANY_EMAIL || 'Buharina.galina@mail.ru',
-    address: import.meta.env.VITE_COMPANY_ADDRESS || 'Шушенское, Первомайская ул., 56',
+    email: import.meta.env.VITE_COMPANY_EMAIL || 'buharina.galina@mail.ru',
+    address: import.meta.env.VITE_COMPANY_ADDRESS || 'Шушенское, Первомайская ул., 56a',
     workingHours: {
       description: 'Круглосуточно, без выходных',
       emergency: 'Экстренный выезд в течение часа',

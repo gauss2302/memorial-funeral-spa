@@ -201,6 +201,7 @@ const initYandexMap = () => {
   color: var(--color-primary);
   margin-bottom: 2rem;
   font-size: 1.5rem;
+  text-align: center; /* Центрируем заголовок */
 }
 
 .contact-item {
@@ -303,6 +304,7 @@ const initYandexMap = () => {
   transition: all 0.3s ease;
   cursor: pointer;
   font-family: inherit;
+  line-height: 1;
 }
 
 .btn-primary {
@@ -340,6 +342,7 @@ const initYandexMap = () => {
 
 .map-header {
   margin-bottom: 1.5rem;
+  text-align: center; /* Центрируем заголовок карты */
 }
 
 .map-header h3 {
@@ -374,6 +377,7 @@ const initYandexMap = () => {
   padding: 1.5rem;
   border-radius: 0.75rem;
   box-shadow: var(--shadow-sm);
+  text-align: center; /* Центрируем содержимое карточек */
 }
 
 .transport-info h4,
@@ -408,12 +412,17 @@ const initYandexMap = () => {
 
   .map-info {
     grid-template-columns: 1fr;
+    max-width: 400px; /* Ограничиваем ширину на планшетах */
+    margin: 0 auto; /* Центрируем */
   }
 }
 
 @media (max-width: 768px) {
   .contact-actions {
     flex-direction: column;
+    align-items: center; /* Центрируем кнопки */
+    max-width: 350px; /* Ограничиваем ширину */
+    margin: 0 auto; /* Центрируем блок кнопок */
   }
 
   .yandex-map {
@@ -423,29 +432,69 @@ const initYandexMap = () => {
   .contact-item {
     flex-direction: column;
     text-align: center;
+    align-items: center; /* Центрируем элементы */
   }
 
   .contact-icon {
     align-self: center;
   }
 
+  .contact-details {
+    text-align: center; /* Центрируем содержимое */
+    width: 100%;
+  }
+
   .section-title {
     font-size: 2rem;
+  }
+
+  /* Центрируем весь контент на мобильных */
+  .contact-card {
+    text-align: center;
+  }
+
+  .map-header {
+    text-align: center;
   }
 }
 
 @media (max-width: 576px) {
   .contact-card {
     padding: 1.5rem;
+    text-align: center; /* Принудительно центрируем */
   }
 
   .map-info {
     gap: 0.75rem;
+    grid-template-columns: 1fr; /* На маленьких экранах в одну колонку */
+    max-width: 300px; /* Еще больше ограничиваем ширину */
   }
 
   .transport-info,
   .parking-info {
     padding: 1rem;
+    text-align: center;
+  }
+
+  .contact-item {
+    text-align: center;
+    align-items: center;
+  }
+
+  .contact-details {
+    text-align: center;
+  }
+
+  /* Дополнительное центрирование для мобильных */
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-actions .btn {
+    width: 100%;
+    max-width: 280px; /* Ограничиваем ширину кнопок */
   }
 }
 </style>

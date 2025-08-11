@@ -57,6 +57,32 @@
         </div>
       </div>
 
+      <!-- Service Categories - Перенёс внутрь container -->
+      <div class="services-categories">
+        <h3 class="categories-title">Дополнительные услуги</h3>
+
+        <div class="categories-grid">
+          <div v-for="service in additionalServices" :key="service.id" class="category-card">
+            <div class="category-icon">
+              <img
+                :src="getServiceIcon(service.category)"
+                :alt="`Иконка ${service.title}`"
+                width="24"
+                height="24"
+                @error="handleImageError"
+                @load="handleImageLoad"
+              />
+            </div>
+            <div class="category-content">
+              <h4 class="category-title">{{ service.title }}</h4>
+              <p class="category-description">{{ service.description }}</p>
+              <div class="category-price">{{ service.price }}</div>
+            </div>
+            <button class="category-button" @click="openServiceModal(service)">→</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Call to Action -->
       <div class="services-cta">
         <div class="cta-content">
@@ -328,6 +354,104 @@ const handleImageLoad = (event: Event) => {
   background-color: #7a654a;
 }
 
+/* Additional Services - Центрированные стили */
+.services-categories {
+  margin-bottom: 4rem;
+  max-width: 900px; /* Ограничиваем максимальную ширину */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.categories-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  font-size: 1.75rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  justify-items: center; /* Центрируем элементы в grid */
+}
+
+.category-card {
+  background: var(--color-background);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 400px; /* Ограничиваем максимальную ширину карточки */
+}
+
+.category-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(5px);
+}
+
+.category-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--color-background-alt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.category-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.category-content {
+  flex: 1;
+}
+
+.category-title {
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.category-description {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.category-price {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.category-button {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.category-button:hover {
+  background: #7a654a;
+  transform: scale(1.1);
+}
+
 /* Call to Action */
 .services-cta {
   background: var(--color-primary);
@@ -388,6 +512,20 @@ const handleImageLoad = (event: Event) => {
 }
 
 /* Responsive Design */
+@media (max-width: 968px) {
+  .services-categories {
+    max-width: 100%; /* На средних экранах используем всю ширину */
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .category-card {
+    max-width: 100%; /* На планшетах карточки занимают всю доступную ширину */
+  }
+}
+
 @media (max-width: 768px) {
   .services-grid {
     grid-template-columns: 1fr;
@@ -420,6 +558,16 @@ const handleImageLoad = (event: Event) => {
 
   .services-cta .btn-lg {
     max-width: 320px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
   }
 }
 
