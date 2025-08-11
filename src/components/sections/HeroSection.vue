@@ -43,7 +43,12 @@
         </div>
 
         <div class="hero-image">
-          <HeroCarousel :images="carouselImages" />
+          <HeroCarousel
+            :images="carouselImages"
+            height="450px"
+            :autoplay="true"
+            :autoplay-delay="4000"
+          />
         </div>
       </div>
     </div>
@@ -59,7 +64,17 @@ const { contactInfo } = useCompanyStore()
 
 const carouselImages: CarouselImage[] = [
   {
-    src: '/images/goodbye.jpg',
+    src: '/images/main.jpg',
+    alt: 'Ритуальные услуги полного цикла',
+    width: 800,
+    height: 600,
+    caption: {
+      title: 'Ритуальные услуги полного цикла',
+      description: 'Широкий спект выбора',
+    },
+  },
+  {
+    src: '/images/zal.jpg',
     alt: 'Ритуальный зал с цветами и свечами',
     width: 800,
     height: 600,
@@ -69,7 +84,7 @@ const carouselImages: CarouselImage[] = [
     },
   },
   {
-    src: '/images/transport.jpg',
+    src: '/images/car.jpg',
     alt: 'Транспортные услуги',
     width: 800,
     height: 600,
@@ -79,13 +94,23 @@ const carouselImages: CarouselImage[] = [
     },
   },
   {
-    src: '/images/venki.png',
+    src: '/images/venki1.jpg',
     alt: 'Венки и цветы',
     width: 800,
     height: 600,
     caption: {
       title: 'Цветочные композиции',
       description: 'Красивые венки и букеты',
+    },
+  },
+  {
+    src: '/images/venki2.jpg',
+    alt: 'Венки и цветы',
+    width: 800,
+    height: 600,
+    caption: {
+      title: 'Цветочные композиции',
+      description: 'Большой ассортимент на выбор',
     },
   },
 ]
@@ -201,8 +226,8 @@ const scrollToSection = (sectionId: string) => {
 }
 
 .hero-image {
-  height: 750px;
-  width: auto;
+  height: 450px;
+  width: 100%;
 }
 
 /* Responsive Design */
@@ -231,6 +256,10 @@ const scrollToSection = (sectionId: string) => {
     justify-content: center;
     flex-wrap: wrap;
   }
+
+  .hero-image {
+    height: 350px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -258,7 +287,7 @@ const scrollToSection = (sectionId: string) => {
   }
 
   .hero-image {
-    height: 300px;
+    height: 280px;
   }
 }
 
@@ -278,6 +307,10 @@ const scrollToSection = (sectionId: string) => {
 
   .feature {
     justify-content: center;
+  }
+
+  .hero-image {
+    height: 240px;
   }
 }
 </style>

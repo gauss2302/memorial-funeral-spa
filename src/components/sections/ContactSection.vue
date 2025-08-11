@@ -1,4 +1,3 @@
-<!-- src/components/sections/ContactSection.vue -->
 <template>
   <section id="contact" class="contact-section section">
     <div class="container">
@@ -76,7 +75,7 @@
           <div class="map-info">
             <div class="transport-info">
               <h4>🚇 Ориентир</h4>
-              <p>Центр Шушенского</p>
+              <p>Шушенский с\х Колледж</p>
               <p>Удобный подъезд</p>
             </div>
 

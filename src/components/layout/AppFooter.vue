@@ -1,4 +1,3 @@
-<!-- src/components/layout/AppFooter.vue -->
 <template>
   <footer class="app-footer">
     <div class="container">

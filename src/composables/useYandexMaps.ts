@@ -1,4 +1,3 @@
-// src/composables/useYandexMaps.ts
 import { ref, readonly } from 'vue'
 
 export const useYandexMaps = () => {
@@ -71,8 +70,8 @@ export const useYandexMaps = () => {
     }
 
     const defaultOptions = {
-      center: [53.326444, 91.945381],
-      zoom: 16,
+      center: [53.337081, 91.960051],
+      zoom: 8,
       controls: ['zoomControl', 'typeSelector', 'fullscreenControl'],
     }
 

@@ -96,15 +96,15 @@ export const useSEO = () => {
           url: siteUrl,
           address: {
             '@type': 'PostalAddress',
-            streetAddress: 'Первомайская ул., 46',
+            streetAddress: 'Первомайская ул., 56',
             addressLocality: 'Шушенское',
             addressRegion: 'Красноярский край',
             addressCountry: 'RU',
           },
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: '53.326444',
-            longitude: '91.945381',
+            latitude: '53.337081',
+            longitude: '91.960051',
           },
           openingHours: 'Mo-Su 00:00-24:00',
           serviceArea: {

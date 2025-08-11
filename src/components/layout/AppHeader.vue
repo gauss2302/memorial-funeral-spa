@@ -1,4 +1,3 @@
-<!-- src/components/layout/AppHeader.vue - Fixed active states -->
 <template>
   <header class="app-header">
     <div class="container">
@@ -144,7 +143,6 @@ const scrollToServices = () => {
 }
 
 const scrollToAbout = () => {
-  // For now scroll to services, you can add an about section later
   scrollToElement('services')
 }
 
@@ -152,22 +150,19 @@ const scrollToContacts = () => {
   scrollToElement('contact')
 }
 
-// Update active section based on scroll position
 const updateActiveSection = () => {
   const sections = [
     { id: 'services', name: 'services' },
     { id: 'contact', name: 'contact' },
   ]
 
-  const scrollPosition = window.scrollY + 100 // Offset for header
+  const scrollPosition = window.scrollY + 100
 
-  // Check if we're at the top (home section)
   if (scrollPosition < 200) {
     activeSection.value = 'home'
     return
   }
 
-  // Check other sections
   for (const section of sections) {
     const element = document.getElementById(section.id)
     if (element) {
@@ -180,15 +175,13 @@ const updateActiveSection = () => {
   }
 }
 
-// Close menu on escape key
 onKeyStroke('Escape', () => {
   closeMenu()
 })
 
-// Set up scroll listener for active states
 onMounted(() => {
   window.addEventListener('scroll', updateActiveSection)
-  updateActiveSection() // Initial call
+  updateActiveSection()
 })
 
 onUnmounted(() => {
